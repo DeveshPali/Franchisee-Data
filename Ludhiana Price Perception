@@ -1,0 +1,15 @@
+with CTE as (
+select sid.bill_to_contact,Sid.shipping_address_name from sales_invoice_data sid 
+where sid.transaction_date >= '2025-07-01' and sid.customer_type = 'Customer Sales'
+and sid.company_id = '29'
+group by sid.bill_to_contact,Sid.shipping_address_name
+)
+select sid.bill_to_contact,Sid.shipping_address_name,sum(p_amount) as sales from sales_invoice_data sid 
+left join CTE on CTE.bill_to_contact = Sid.bill_to_contact
+where  sid.customer_type = 'Customer Sales' 
+and sid.company_id = '29' and CTE.bill_to_contact is null 
+group by sid.bill_to_contact,Sid.shipping_address_name
+having sum(p_amount) >= '1500'
+
+
+
