@@ -1,0 +1,2 @@
+select Id,name,email,rc.company_type from res_company rc
+where rc.company_type = 'franchise_partner'
