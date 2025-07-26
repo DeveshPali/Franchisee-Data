@@ -1,0 +1,14 @@
+with CTE as (
+select sid.bill_to_contact,Sid.shipping_address_name from sales_invoice_data sid 
+where sid.product_name  = '%Sara%' 
+and sid.product_category = 'Treats'
+and sid.customer_type = 'Customer Sales'
+and sid.company_id = '35'
+group by sid.bill_to_contact,Sid.shipping_address_name
+)
+select sid.city,sid.bill_to_contact,Sid.shipping_address_name,sum(p_amount) as sales from sales_invoice_data sid 
+left join CTE on CTE.bill_to_contact = Sid.bill_to_contact
+where  sid.customer_type = 'Customer Sales' 
+and sid.product_category = 'Treats'
+and sid.company_id = '35' and CTE.bill_to_contact is null 
+group by sid.bill_to_contact,Sid.shipping_address_name,sid.city
