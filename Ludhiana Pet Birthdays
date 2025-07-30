@@ -1,0 +1,48 @@
+WITH ABC AS (
+    select
+        sid.customer_id,
+        sid.Bill_To_Contact
+    FROM
+        sales_invoice_data sid
+    WHERE
+        sid.company_id = '29'
+        AND sid.order_reference IS NOT NULL
+        AND sid.item_status = 'Completed'
+    GROUP BY
+        sid.channel,
+        sid.customer_id,
+        sid.Bill_To_Contact
+ union
+ 
+ select 
+         Rp.id   as Customer_id,
+         Rp.phone as Bill_To_Contact
+  from res_partner rp 
+left join res_users ru on ru.id = rp.write_uid 
+where ru.login = 'malhar.ldh@headsupfortails.com'
+)
+,
+Pet AS (
+    SELECT
+        CPI.partner_id AS Phone_No,
+        CPI.name AS Pet_Name,
+        CPI.birthday AS Birthday, 
+        count(cpi.birthday) as birthday_count
+    FROM
+        res_partner_pet CPI
+    WHERE
+       EXTRACT(MONTH FROM CPI.birthday) in (TO_CHAR(CURRENT_DATE, 'MM')::INTEGER)  -- Filter for pets born in September
+	group by CPI.PARTNER_ID, CPI.NAME, CPI.BIRTHDAY        
+)
+SELECT 
+    Pet.Pet_Name,
+    Pet.Birthday,
+    ABC.Bill_To_Contact AS Bill_To_Contact,
+    rp.name AS Customer_Name
+FROM
+    ABC
+LEFT JOIN Pet ON Pet.Phone_No = ABC.customer_id
+LEFT JOIN res_partner rp ON rp.id = ABC.customer_id
+WHERE
+    Pet.Birthday_Count > 0 
+group by   PET.PET_NAME, PET.BIRTHDAY, ABC.BILL_TO_CONTACT, RP.NAME
