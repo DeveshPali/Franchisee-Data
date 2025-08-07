@@ -1,2 +1,21 @@
 select Id,name,email,rc.company_type from res_company rc
 where rc.company_type = 'franchise_partner'
+
+
+
+
+#	id	name	email	company_type
+1	"30"	"P6 Ventures"	"[NULL]"	"franchise_partner"
+2	"38"	"Pet Crew"	"rspuram.coimbatore@headsupfortails.com"	"franchise_partner"
+3	"37"	"SEEKERSANDCO"	"panaji.goa@headsupfortails.com"	"franchise_partner"
+4	"32"	"Kaushal Kumar Agarwal (Jamshedpur)"	"jamshedpur@headsupfortails.com"	"franchise_partner"
+5	"34"	"Bark And Beauty Pets Private Limited"	"gokulam.mysore@headsupfortails.com"	"franchise_partner"
+6	"33"	"Bonus and Company"	"bajajnagar.nagpur@headsupfortails.com"	"franchise_partner"
+7	"35"	"Arthemio Hospitality Private Limited"	"sahidnagar.bhubaneswar@headsupfortails.com"	"franchise_partner"
+8	"39"	"J.N.M. ENTERPRISE"	"jnm@headsupfortails.com"	"franchise_partner"
+9	"36"	"Pawfect Care"	"ganganagar.meerut@headsupfortails.com"	"franchise_partner"
+10	"29"	"M/s Pets N Vets"	"huftludhiana@gmail.com"	"franchise_partner"
+11	"31"	"Shrisay Enterprises"	"shrisay@headsupfortails.com"	"franchise_partner"
+12	"28"	"Square Deal"	"kochi@huft.com"	"franchise_partner"
+
+
